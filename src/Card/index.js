@@ -1,9 +1,9 @@
 import React from 'react';
-import './Caption.css';
+import './Card.css';
 
-const caption = (props) => {
+const Card = (props) => {
   return (
-    <div className="Caption">
+    <div className="Card">
       <h1>{props.name}</h1>
       <hr/>
       <p>{props.children}</p>
@@ -11,4 +11,4 @@ const caption = (props) => {
   )
 }
 
-export default caption;
+export default Card;

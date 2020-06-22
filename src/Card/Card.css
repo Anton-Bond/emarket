@@ -1,17 +1,16 @@
-.Caption {
+.Card {
   width: 250px;
-  margin: 40px 25px;
   padding: 10px;
   border: 2px solid #63ce5a;
 }
 
-.Caption h1 {
+.Card h1 {
   font-size: 25px;
   text-align: center;
   margin-bottom: 5px;
 }
 
-.Caption p {
+.Card p {
   margin-top: 15px;
   hyphens: auto;
 }
