@@ -4,13 +4,30 @@
   border: 2px solid #63ce5a;
 }
 
-.Card h1 {
-  font-size: 25px;
-  text-align: center;
-  margin-bottom: 5px;
-}
-
 .Card p {
   margin-top: 15px;
   hyphens: auto;
+}
+
+.Title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.Title h1 {
+  font-size: 25px;
+  text-align: center;
+  display: block;
+  flex-basis: 160px;
+}
+
+.Switch {
+  display: flex;
+  align-items: center;
+}
+
+.Switch label {
+  font-size: 12px;
+  color: #63ce5a;
 }
