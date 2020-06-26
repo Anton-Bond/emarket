@@ -3,29 +3,25 @@ import './Card.css';
 
 const Card = (props) => {
 
-  // set font color by default
-  const [colorState, setColorState] = useState({
-    color: 'inherit'
-  });
-
-  // swithc color by checkbox
-  const swichColorHandler = () => {
-    colorState.color === 'inherit' ? setColorState({ color: '#63ce5a' }) : setColorState({ color: 'inherit' });
-  };
+  const [isChecked, setChecked] = useState(false);
 
   return (
-    <div className="Card" style={colorState}>
+    <div className="Card" style={{ color: isChecked && '#63ce5a' }}>
       <div className="Title">
         <h1>{props.title}</h1>
         <div className="Switch">
           <label htmlFor="switchColor">Switch color:</label>
-          <input type="checkbox" id="switchColor" onChange={swichColorHandler}/>
+          <input
+            type="checkbox"
+            id="switchColor"
+            onChange={() => setChecked(!isChecked)}
+          />
         </div>
       </div>
-      <hr/>
+      <hr />
       <p>{props.children}</p>
     </div>
-  )
+  );
 }
 
 export default Card;
