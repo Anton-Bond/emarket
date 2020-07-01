@@ -1,22 +1,57 @@
-import React from 'react';
+import React,  { useState }  from 'react';
 import { AiOutlineEdit } from "react-icons/ai";
 import { AiOutlineCheck } from "react-icons/ai";
 import { AiOutlineClose } from "react-icons/ai";
 import './Card.css';
 
 const Card = (props) => {
+
+  const [isChecked, setChecked] = useState(false);
+  const [isEditMode, setEditMode] = useState(false);
+
+  //  
+  const [cardValues, setcardValues] = useState({
+    title: props.title,
+    context: props.context
+  });
+
+  // 
+  const titleChangedHandler = event => {
+    setcardValues({ 
+      title: event.target.value,
+      context: cardValues.context
+    });
+  };
+
+  const contextChangedHandler = event => {
+    setcardValues({
+      title: cardValues.title,
+      context: event.target.value
+    });
+  };
+
+  const saveChangesHandler = () => {
+    props.onSave(cardValues);
+    setEditMode(!isEditMode);
+  };
+
+  const switchToEditModeHandler = () => {
+    setEditMode(!isEditMode);
+    setChecked(false);
+  }
+
   return (
     // style depends on checkbox
-    <div className="Card" style={{ color: props.isChecked && '#63ce5a' }}>
-      { props.isEditMode 
+    <div className="Card" style={{ color: isChecked && '#63ce5a' }}>
+      { isEditMode 
         // editor card title
         ? <div className="Title">
             <div className="Title-context">
-              <input type="text" id="title-editor" onChange={props.changedTitle} value={props.title} />
+              <input type="text" id="title-editor" onChange={titleChangedHandler} value={cardValues.title} />
             </div>
             <div className="Controls">
-              <a onClick={props.onToggleMode}><AiOutlineCheck /></a>
-              <a onClick={props.onCancel}><AiOutlineClose /></a>
+              <AiOutlineCheck onClick={saveChangesHandler} />
+              <AiOutlineClose onClick={() => setEditMode(!isEditMode)} />
             </div>
           </div>
           // view title card
@@ -24,22 +59,22 @@ const Card = (props) => {
           <div className="Title-context">
             <h1>{props.title}</h1>
           </div>
-            <div className="Controls">
-              <a onClick={props.onToggleMode}><AiOutlineEdit /></a>
-              {/* color switcher */}
-              <input
-                type="checkbox"
-                id="switchColor"
-                onChange={props.onCheck}
-              />
-            </div>
+          <div className="Controls">
+            <AiOutlineEdit onClick={switchToEditModeHandler} />
+            {/* color switcher */}
+            <input
+              type="checkbox"
+              id="switchColor"
+              onChange={() => setChecked(!isChecked)}
+            />
+          </div>
         </div>
       }
       <hr />
-      { props.isEditMode 
+      { isEditMode 
         // editor context card
         ? <div>
-            <textarea onChange={props.changedContext} value={props.context}></textarea>
+            <textarea onChange={contextChangedHandler} value={cardValues.context}></textarea>
           </div>
           // view contex cart
         : <div>

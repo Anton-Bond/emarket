@@ -7,6 +7,7 @@
 .Card p {
   margin-top: 15px;
   hyphens: auto;
+  overflow-x: hidden;
 }
 
 .Title {
@@ -20,13 +21,12 @@
 }
 
 .Title-context {
-  float: left;
   width: 80%;
-  margin-left: 10рх;
+  overflow-x: hidden;
 }
 
 .Controls {
-  margin-left: 15px;
+  margin-left: auto;
 }
 
 textarea {
@@ -35,4 +35,4 @@ textarea {
   height: 160px;
   margin-top: 10px;
   border: 1px solid black;
-  }
+}
