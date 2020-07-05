@@ -47,7 +47,13 @@ const Card = (props) => {
         // editor card title
         ? <div className="Title">
             <div className="Title-context">
-              <input type="text" id="title-editor" onChange={titleChangedHandler} value={cardValues.title} />
+              <input 
+                type="text" 
+                id="title-editor" 
+                className="Card-editor-title"
+                onChange={titleChangedHandler} 
+                value={cardValues.title} 
+              />
             </div>
             <div className="Controls">
               <AiOutlineCheck onClick={saveChangesHandler} />
@@ -74,7 +80,11 @@ const Card = (props) => {
       { isEditMode 
         // editor context card
         ? <div>
-            <textarea onChange={contextChangedHandler} value={cardValues.context}></textarea>
+            <textarea 
+              className="Card-edit-context" 
+              onChange={contextChangedHandler} 
+              value={cardValues.context}
+            ></textarea>
           </div>
           // view contex cart
         : <div>

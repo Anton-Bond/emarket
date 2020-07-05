@@ -16,10 +16,12 @@ class App extends Component {
 
   // save card changes
   saveHandler = value => {
-    const card = this.state.card;
-    card.title = value.title;
-    card.context = value.context;
-    this.setState({ card });
+    this.setState({
+      card: {
+        title: value.title,
+        context: value.context
+      }
+    })
   }
 
   render () {
