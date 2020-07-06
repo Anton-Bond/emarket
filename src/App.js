@@ -5,36 +5,75 @@ import Card from './Card';
 
 class App extends Component {
   state = {
-    card: {
-      title: 'Caption',
-      context: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                Utenim ad minim veniam, quis nostrud exercitation ullamco laboris 
-                nisi ut aliquip ex ea commodo consequat.`,
-    }
+    planets: [
+      {title: 'Mercury', context: `Mercury — the smallest planet in our solar 
+        system and closest to the Sun — is only slightly larger than Earth's 
+        Moon. Mercury is the fastest planet, zipping around the Sun every 
+        88 Earth days.`},
+      {title: 'Venus', context: `Venus spins slowly in the opposite direction
+        from most planets. A thick atmosphere traps heat in a runaway greenhouse
+         effect, making it the hottest planet in our solar system.`},
+      {title: 'Earth', context: `Earth — our home planet — is the only place we know 
+        of so far that’s inhabited by living things. It's also the only planet 
+        in our solar system with liquid water on the surface.`},
+      {title: 'Mars', context: `Mars is a dusty, cold, desert world with a very 
+        thin atmosphere. There is strong evidence Mars was — billions of years 
+        ago — wetter and warmer, with a thicker atmosphere.`},
+      {title: 'Jupiter', context: `Jupiter is more than twice as massive than 
+        the other planets of our solar system combined. The giant planet's 
+        Great Red spot is a centuries-old storm bigger than Earth.`},
+      {title: 'Saturn', context: `Adorned with a dazzling, complex system of 
+        icy rings, Saturn is unique in our solar system. The other giant 
+        planets have rings, but none are as spectacular as Saturn's.`},
+      {title: 'Uranus', context: `Uranus — seventh planet from the Sun — rotates 
+        at a nearly 90-degree angle from the plane of its orbit. This unique 
+        tilt makes Uranus appear to spin on its side.`},
+      {title: 'Neptune', context: `Neptune — the eighth and most distant major 
+        planet orbiting our Sun — is dark, cold and whipped by supersonic winds. 
+        It was the first planet located through mathematical calculations.`},
+    ],
+    viewOnly: false
   }
 
   // save card changes
-  saveHandler = value => {
-    this.setState({
-      card: {
-        title: value.title,
-        context: value.context
-      }
-    })
+  saveHandler = (value, index) => {
+    const planet = {...this.state.planets[index]};
+    planet.title = value.title;
+    planet.context = value.context;
+    const planets = [...this.state.planets];
+    planets[index] = planet;
+    this.setState({ planets });
+  }
+
+  // toggle view page mode 
+  toggleViewOnlyHandler = () => {
+    this.setState( { viewOnly: !this.state.viewOnly } );
   }
 
   render () {
-    const card = this.state.card;
+    let planets = this.state.planets.map((p, index) => {
+      return <Card 
+        title={p.title} 
+        context={p.context} 
+        key={index}
+        isViewOnly={this.state.viewOnly}
+        onSave={(value) => this.saveHandler(value, index)} 
+      />
+    });
+
     return (
       <div className="App">
         <Header />
         <div className="cardWrapper">
-          <Card 
-            title={card.title}
-            context={card.context}
-            onSave={this.saveHandler}
-          />
+          <div className="view-checkbox">
+            <input
+              type="checkbox"
+              name="viewOnly"
+              id="viewOnly"
+              onChange={this.toggleViewOnlyHandler}
+            /><label>Только просмотр </label> 
+          </div>
+          {planets}
         </div>   
       </div>
       

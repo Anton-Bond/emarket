@@ -1,3 +1,11 @@
 .cardWrapper {
   margin: 40px 25px;
 }
+
+.view-checkbox {
+  padding-left: 1em;
+}
+
+.view-checkbox label {
+  padding-left: .3em;
+}
