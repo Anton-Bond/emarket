@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
 import './App.css';
 import Header from './Header';
 import Card from './Card';
@@ -69,18 +70,47 @@ class App extends Component {
       );
     });
 
+    const StyledLabelView = styled.label`
+      &:before {
+        content: '\\2714';
+        color: ${(props) => (props.alt ? '#000' : 'transparent')};
+        display: inline-block;
+        background: ${(props) => (props.alt ? '#009688' : '#ccc')};
+        border: 2px solid;
+        border-color: ${(props) => (props.alt ? '#009688' : '#7A7A7A')};
+        border-radius: 5px;
+        font-size: 20px;
+        font-weight: 900;
+        line-height: 22px;
+        margin: -5px 5px 0 0;
+        height: 20px;
+        width: 20px;
+        text-align: center;
+        vertical-align: middle;
+        transition: color ease 0.3s;
+        cursor: pointer;
+      }
+    `;
+
+    const StyledCheckboxView = styled.input`
+      display: none;
+    `;
+
     return (
       <div className="App">
         <Header />
         <div className="cardWrapper">
           <div className="view-checkbox">
-            <input
+            <StyledCheckboxView
               type="checkbox"
               name="viewOnly"
               id="viewOnly"
+              checked={this.state.viewOnly}
               onChange={this.toggleViewOnlyHandler}
             />
-            <label>Только просмотр </label>
+            <StyledLabelView for="viewOnly" alt={this.state.viewOnly}>
+              Только просмотр
+            </StyledLabelView>
           </div>
           {planets}
         </div>
