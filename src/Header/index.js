@@ -4,7 +4,7 @@ import './Header.css';
 const Header = (props) => {
   return (
     <header className="Header">
-      <h1>Header</h1>
+      <h1>Планеты солнечной системы</h1>
     </header>
   );
 };

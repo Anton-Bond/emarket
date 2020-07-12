@@ -1,0 +1,18 @@
+.Title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.Card-editor-title {
+  width: 90%;
+}
+
+.Title-context {
+  width: 80%;
+  overflow-x: hidden;
+}
+
+.Controls {
+  margin-left: auto;
+}

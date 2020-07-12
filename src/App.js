@@ -1,43 +1,44 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+
 import './App.css';
 import Header from './Header';
-import Card from './Card';
+import CardList from './CardList';
 
 class App extends Component {
   state = {
     planets: [
       {
-        title: 'Mercury',
-        context: `Mercury — the smallest planet in our solar system and closest to the Sun — is only slightly larger than Earth's Moon. Mercury is the fastest planet, zipping around the Sun every 88 Earth days.`,
+        title: 'Меркурий',
+        context: `Меркурий - самая маленькая планета в нашей солнечной системе и ближайшая к Солнцу - лишь немного больше, чем Луна Земли. Меркурий - самая быстрая планета, которая движется вокруг Солнца каждые 88 земных дней.`,
       },
       {
-        title: 'Venus',
-        context: `Venus spins slowly in the opposite direction from most planets. A thick atmosphere traps heat in a runaway greenhouse effect, making it the hottest planet in our solar system.`,
+        title: 'Венера',
+        context: `Венера медленно вращается в противоположном направлении от большинства планет. Густая атмосфера задерживает тепло в безудержном парниковом эффекте, что делает ее самой горячей планетой в нашей солнечной системе.`,
       },
       {
-        title: 'Earth',
-        context: `Earth — our home planet — is the only place we know of so far that’s inhabited by living things. It's also the only planet in our solar system with liquid water on the surface.`,
+        title: 'Земля',
+        context: `Земля - наша родная планета - единственное место, которое мы знаем до сих пор, где обитают живые существа. Это также единственная планета в нашей солнечной системе с жидкой водой на поверхности.`,
       },
       {
-        title: 'Mars',
-        context: `Mars is a dusty, cold, desert world with a very thin atmosphere. There is strong evidence Mars was — billions of years ago — wetter and warmer, with a thicker atmosphere.`,
+        title: 'Марс',
+        context: `Марс - это пыльный, холодный, пустынный мир с очень тонкой атмосферой. Существуют убедительные доказательства того, что миллиарды лет назад Марс был более влажным и теплым с более плотной атмосферой.`,
       },
       {
-        title: 'Jupiter',
-        context: `Jupiter is more than twice as massive than the other planets of our solar system combined. The giant planet's Great Red spot is a centuries-old storm bigger than Earth.`,
+        title: 'Юпитер',
+        context: `Юпитер более чем в два раза массивнее, чем другие планеты нашей Солнечной системы вместе взятые. Большое Красное пятно гигантской планеты - это многовековой шторм, превышающий Землю.`,
       },
       {
-        title: 'Saturn',
-        context: `Adorned with a dazzling, complex system of icy rings, Saturn is unique in our solar system. The other giant planets have rings, but none are as spectacular as Saturn's.`,
+        title: 'Сатурн',
+        context: `Украшенный ослепительной сложной системой ледяных колец, Сатурн уникален в нашей солнечной системе. У других гигантских планет есть кольца, но ни одна из них не является столь же впечатляющей, как у Сатурна.`,
       },
       {
-        title: 'Uranus',
-        context: `Uranus — seventh planet from the Sun — rotates at a nearly 90-degree angle from the plane of its orbit. This unique tilt makes Uranus appear to spin on its side.`,
+        title: 'Уран',
+        context: `Уран - седьмая планета от Солнца - вращается под углом почти 90 градусов от плоскости его орбиты. Этот уникальный наклон заставляет Уран вращаться на боку.`,
       },
       {
-        title: 'Neptune',
-        context: `Neptune — the eighth and most distant major planet orbiting our Sun — is dark, cold and whipped by supersonic winds. It was the first planet located through mathematical calculations.`,
+        title: 'Нептун',
+        context: `Нептун - восьмая и самая отдаленная главная планета, вращающаяся вокруг нашего Солнца, - темный, холодный и взбитый сверхзвуковыми ветрами. Это была первая планета, найденная с помощью математических расчетов.`,
       },
     ],
     viewOnly: false,
@@ -57,19 +58,12 @@ class App extends Component {
     this.setState({ viewOnly: !this.state.viewOnly });
   };
 
-  render() {
-    let planets = this.state.planets.map((p, index) => {
-      return (
-        <Card
-          title={p.title}
-          context={p.context}
-          key={index}
-          isViewOnly={this.state.viewOnly}
-          onSave={this.saveHandler(index)}
-        />
-      );
-    });
+  // rerender component without picked cards
+  deleteCardsHandler = () => {
+    this.setState({planets: this.state.planets})
+  }
 
+  render() {
     const StyledLabelView = styled.label`
       &:before {
         content: '\\2714';
@@ -112,7 +106,14 @@ class App extends Component {
               Только просмотр
             </StyledLabelView>
           </div>
-          {planets}
+          <CardList 
+            planets={this.state.planets}
+            viewOnly={this.state.viewOnly}
+            onSave={this.saveHandler}
+          />
+          <div>
+            <button className="btn-delete" onClick={this.deleteCardsHandler}>Удалить выбранные карточки</button>
+          </div>
         </div>
       </div>
     );

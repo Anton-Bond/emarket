@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { AiOutlineEdit } from 'react-icons/ai';
-import { AiOutlineCheck } from 'react-icons/ai';
-import { AiOutlineClose } from 'react-icons/ai';
+
 import './Card.css';
+import CardBody from './CardBody';
+import CardHeader from './CardHeader';
 
 class Card extends Component {
   state = {
@@ -37,10 +37,27 @@ class Card extends Component {
     this.setState({ isEditMode: !this.state.isEditMode });
   };
 
+  // cancel edit changes
+  cancelChangesHandler = () => {
+    this.setState({
+      cardValues: {
+        title: this.props.title,
+        context: this.props.context,
+      }
+    });
+    this.setState({ isEditMode: !this.state.isEditMode });
+  }
+
   switchToEditModeHandler = () => {
     this.setState({ isEditMode: !this.state.isEditMode });
     this.setState({ isChecked: false });
   };
+
+  // toggle checked card and send index to CardList for store picked indexes
+  checkedHandler = () => {
+    this.props.onChecked(!this.state.isChecked)
+    this.setState({ isChecked: !this.state.isChecked });
+  }
 
   // set off edit mode and discard changes when toggle to view only
   static getDerivedStateFromProps(props, state) {
@@ -57,61 +74,22 @@ class Card extends Component {
     return (
       // style depends on checkbox
       <div className="Card" style={{ color: this.state.isChecked && '#63ce5a' }}>
-        {this.state.isEditMode ? (
-          // editor card title
-          <div className="Title">
-            <div className="Title-context">
-              <input
-                type="text"
-                id="title-editor"
-                className="Card-editor-title"
-                onChange={this.titleChangedHandler}
-                value={this.state.cardValues.title}
-              />
-            </div>
-            <div className="Controls">
-              <AiOutlineCheck onClick={this.saveChangesHandler} />
-              <AiOutlineClose
-                onClick={() => this.setState({ isEditMode: !this.state.isEditMode })}
-              />
-            </div>
-          </div>
-        ) : (
-          // view title card
-          <div className="Title">
-            <div className="Title-context">
-              <h1>{this.props.title}</h1>
-            </div>
-            <div className="Controls">
-              {/* hide edit button when view only */}
-              {!this.props.isViewOnly ? (
-                <AiOutlineEdit onClick={this.switchToEditModeHandler} />
-              ) : null}
-              {/* color switcher */}
-              <input
-                type="checkbox"
-                id="switchColor"
-                onChange={() => this.setState({ isChecked: !this.state.isChecked })}
-              />
-            </div>
-          </div>
-        )}
+        <CardHeader
+          title={this.state.cardValues.title}
+          editMode={this.state.isEditMode}
+          changed={this.titleChangedHandler}
+          saved={this.saveChangesHandler}
+          canceled={this.cancelChangesHandler}
+          switched={this.switchToEditModeHandler}
+          viewOnly={this.props.isViewOnly}
+          checked={this.checkedHandler}
+        />
         <hr />
-        {this.state.isEditMode ? (
-          // editor context card
-          <div>
-            <textarea
-              className="Card-edit-context"
-              onChange={this.contextChangedHandler}
-              value={this.state.cardValues.context}
-            ></textarea>
-          </div>
-        ) : (
-          // view contex cart
-          <div>
-            <p>{this.props.context}</p>
-          </div>
-        )}
+        <CardBody 
+          context={this.state.cardValues.context}
+          editMode={this.state.isEditMode}
+          changed={this.contextChangedHandler}
+        />
       </div>
     );
   }
