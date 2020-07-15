@@ -5,6 +5,7 @@ import CardBody from './CardBody';
 import CardHeader from './CardHeader';
 
 class Card extends Component {
+
   state = {
     cardValues: {
       title: this.props.title,
@@ -55,8 +56,8 @@ class Card extends Component {
 
   // toggle checked card and send index to CardList for store picked indexes
   checkedHandler = () => {
-    this.props.onChecked(!this.state.isChecked)
-    this.setState({ isChecked: !this.state.isChecked });
+    this.props.onChecked(!this.state.isChecked);
+    this.setState({ isChecked: !this.state.isChecked });  
   }
 
   // set off edit mode and discard changes when toggle to view only

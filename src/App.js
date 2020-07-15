@@ -42,6 +42,7 @@ class App extends Component {
       },
     ],
     viewOnly: false,
+    checkedCardIndexes: [],
   };
 
   // save card changes
@@ -58,10 +59,27 @@ class App extends Component {
     this.setState({ viewOnly: !this.state.viewOnly });
   };
 
-  // rerender component without picked cards
+  // delete picked planets from state
   deleteCardsHandler = () => {
-    this.setState({planets: this.state.planets})
+    this.setState({planets: this.state.planets.filter((_, i) => {
+      return !this.state.checkedCardIndexes.includes(i)
+    })});
+    this.setState({checkedCardIndexes: []});
   }
+
+  // add index of picked card or delete from array
+  pickCardHandler = (index) => (isChecked) => {
+    let newCheckedCards = this.state.checkedCardIndexes;
+    // add card index if it picked
+    if (isChecked) {
+      newCheckedCards.push(index);
+    } else {
+      // delete from array if card has been unpicked
+      const idx = newCheckedCards.findIndex(item => item === index);
+      newCheckedCards.splice(idx, 1);
+    }
+    this.setState({checkedCardIndexes: newCheckedCards});
+  };
 
   render() {
     const StyledLabelView = styled.label`
@@ -102,7 +120,7 @@ class App extends Component {
               checked={this.state.viewOnly}
               onChange={this.toggleViewOnlyHandler}
             />
-            <StyledLabelView for="viewOnly" alt={this.state.viewOnly}>
+            <StyledLabelView htmlFor="viewOnly" alt={this.state.viewOnly ? 1 : 0}>
               Только просмотр
             </StyledLabelView>
           </div>
@@ -110,6 +128,7 @@ class App extends Component {
             planets={this.state.planets}
             viewOnly={this.state.viewOnly}
             onSave={this.saveHandler}
+            pickCard={this.pickCardHandler}
           />
           <div>
             <button className="btn-delete" onClick={this.deleteCardsHandler}>Удалить выбранные карточки</button>
