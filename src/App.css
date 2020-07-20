@@ -20,5 +20,17 @@
   background: linear-gradient(#f63f1f, #cb2e19) #da401a;
   transition: 0.2s;
 }
-.btn-delete:hover { background: linear-gradient(#d45232, #cb3419) #d45232; }
-.btn-delete:active { background: linear-gradient(#cb3419, #d45232) #cb3419; }
+
+.btn-delete:hover { 
+  background: linear-gradient(#d45232, #cb3419) #d45232;
+}
+
+.btn-delete:active {
+  background: linear-gradient(#cb3419, #d45232) #cb3419;
+}
+
+.btn-delete:disabled {
+  color: #444444;
+  background: linear-gradient(#828584, #a3aaa9) #828584;
+  border-color: #fcfcfc #000 #8f8d8d;
+}

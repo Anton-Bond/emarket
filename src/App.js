@@ -61,11 +61,13 @@ class App extends Component {
 
   // delete picked planets from state
   deleteCardsHandler = () => {
-    this.setState({planets: this.state.planets.filter((_, i) => {
-      return !this.state.checkedCardIndexes.includes(i)
-    })});
-    this.setState({checkedCardIndexes: []});
-  }
+    this.setState({
+      planets: this.state.planets.filter((_, i) => {
+        return !this.state.checkedCardIndexes.includes(i);
+      }),
+    });
+    this.setState({ checkedCardIndexes: [] });
+  };
 
   // add index of picked card or delete from array
   pickCardHandler = (index) => (isChecked) => {
@@ -75,10 +77,10 @@ class App extends Component {
       newCheckedCards.push(index);
     } else {
       // delete from array if card has been unpicked
-      const idx = newCheckedCards.findIndex(item => item === index);
+      const idx = newCheckedCards.findIndex((item) => item === index);
       newCheckedCards.splice(idx, 1);
     }
-    this.setState({checkedCardIndexes: newCheckedCards});
+    this.setState({ checkedCardIndexes: newCheckedCards });
   };
 
   render() {
@@ -124,14 +126,20 @@ class App extends Component {
               Только просмотр
             </StyledLabelView>
           </div>
-          <CardList 
+          <CardList
             planets={this.state.planets}
             viewOnly={this.state.viewOnly}
             onSave={this.saveHandler}
             pickCard={this.pickCardHandler}
           />
           <div>
-            <button className="btn-delete" onClick={this.deleteCardsHandler}>Удалить выбранные карточки</button>
+            <button
+              className="btn-delete"
+              disabled={this.state.viewOnly}
+              onClick={this.deleteCardsHandler}
+            >
+              Удалить выбранные карточки
+            </button>
           </div>
         </div>
       </div>

@@ -5,7 +5,6 @@ import CardBody from './CardBody';
 import CardHeader from './CardHeader';
 
 class Card extends Component {
-
   state = {
     cardValues: {
       title: this.props.title,
@@ -44,21 +43,23 @@ class Card extends Component {
       cardValues: {
         title: this.props.title,
         context: this.props.context,
-      }
+      },
     });
     this.setState({ isEditMode: !this.state.isEditMode });
-  }
+  };
 
   switchToEditModeHandler = () => {
     this.setState({ isEditMode: !this.state.isEditMode });
     this.setState({ isChecked: false });
+    // delete card from picked array of cards
+    this.props.onChecked(false);
   };
 
   // toggle checked card and send index to CardList for store picked indexes
   checkedHandler = () => {
     this.props.onChecked(!this.state.isChecked);
-    this.setState({ isChecked: !this.state.isChecked });  
-  }
+    this.setState({ isChecked: !this.state.isChecked });
+  };
 
   // set off edit mode and discard changes when toggle to view only
   static getDerivedStateFromProps(props, state) {
@@ -66,6 +67,17 @@ class Card extends Component {
       return {
         cardValues: { ...props },
         isEditMode: false,
+      };
+    }
+    // set new state when delete picked cards from main page app
+    if (
+      !state.isEditMode &&
+      props.title !== state.cardValues.title &&
+      props.context !== state.cardValues.context
+    ) {
+      return {
+        cardValues: { ...props },
+        isChecked: false,
       };
     }
     return null;
@@ -84,9 +96,10 @@ class Card extends Component {
           switched={this.switchToEditModeHandler}
           viewOnly={this.props.isViewOnly}
           checked={this.checkedHandler}
+          isChecked={this.state.isChecked}
         />
         <hr />
-        <CardBody 
+        <CardBody
           context={this.state.cardValues.context}
           editMode={this.state.isEditMode}
           changed={this.contextChangedHandler}

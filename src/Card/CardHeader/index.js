@@ -42,6 +42,7 @@ const CardHeader = (props) => {
             <input
               type="checkbox"
               id="switchColor"
+              checked={props.isChecked}
               onChange={props.checked}
             />
           </div>
