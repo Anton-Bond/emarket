@@ -6,6 +6,7 @@ import CardHeader from './CardHeader';
 
 class Card extends Component {
   state = {
+    id: this.props.id,
     cardValues: {
       title: this.props.title,
       context: this.props.context,
@@ -70,11 +71,7 @@ class Card extends Component {
       };
     }
     // set new state when delete picked cards from main page app
-    if (
-      !state.isEditMode &&
-      props.title !== state.cardValues.title &&
-      props.context !== state.cardValues.context
-    ) {
+    if (!state.isEditMode && props.id !== state.id) {
       return {
         cardValues: { ...props },
         isChecked: false,

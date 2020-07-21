@@ -3,15 +3,16 @@ import React from 'react';
 import Card from '../Card';
 
 const CardList = (props) => {
-  return props.planets.map((p, index) => {
+  return props.planets.map((p) => {
     return (
       <Card
         title={p.title}
         context={p.context}
-        key={index}
+        key={p.id}
+        id={p.id}
         isViewOnly={props.viewOnly}
-        onSave={props.onSave(index)}
-        onChecked={props.pickCard(index)}
+        onSave={props.onSave(p.id)}
+        onChecked={props.pickCard(p.id)}
       />
     );
   });
