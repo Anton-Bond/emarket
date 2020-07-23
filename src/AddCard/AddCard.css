@@ -1,0 +1,42 @@
+.AddCard {
+  width: 250px;
+  padding: 10px;
+  border: 2px solid #63ce5a;
+  display: inline-block;
+  margin: 1em;
+  vertical-align: top;
+}
+
+.Title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.editor-title {
+  width: 90%;
+}
+
+.title-context-add-card {
+  width: 80%;
+  overflow-x: hidden;
+}
+
+.controls-add-card {
+  margin-left: auto;
+}
+
+.textarea-add-card {
+  width: 100%;
+  min-height: 160px;
+  margin-top: 10px;
+  border: 1px solid black;
+  resize: none;
+}
+
+.icon-add {
+  transform: scale(250%);
+  cursor: pointer;
+  display: block;
+  margin: 50px auto;
+}

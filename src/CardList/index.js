@@ -1,9 +1,10 @@
 import React from 'react';
 
 import Card from '../Card';
+import AddCard from '../AddCard';
 
 const CardList = (props) => {
-  return props.planets.map((p) => {
+  const planets = props.planets.map((p) => {
     return (
       <Card
         title={p.title}
@@ -16,6 +17,15 @@ const CardList = (props) => {
       />
     );
   });
+
+  return (
+    <div>
+      {planets}
+      <AddCard
+        onSave={props.onSaveNew}
+      />
+    </div>
+  );
 };
 
 export default CardList;

@@ -78,6 +78,16 @@ class App extends Component {
     this.setState({ checkedCards: [] });
   };
 
+  // add new planet to state, get values from AddCard
+  addNewPlanetHandler = (values) => {
+    const newPlanet = {
+      id: values.id,
+      title: values.title,
+      context: values.context,
+    }
+    this.setState({planets: [...this.state.planets, newPlanet]})
+  }
+
   // add index of picked card or delete from array
   pickCardHandler = (id) => (isChecked) => {
     let newCheckedCards = this.state.checkedCards;
@@ -140,6 +150,7 @@ class App extends Component {
             viewOnly={this.state.viewOnly}
             onSave={this.saveHandler}
             pickCard={this.pickCardHandler}
+            onSaveNew={this.addNewPlanetHandler}
           />
           <div>
             <button
