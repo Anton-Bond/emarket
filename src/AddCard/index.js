@@ -28,9 +28,9 @@ class AddCard extends Component {
   // save new card to App state
   saveHandler = () => {
     this.props.onSave(this.state);
-    this.setState({ 
+    this.setState({
       id: null,
-     })
+    });
   };
 
   // cancel add new card

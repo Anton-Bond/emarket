@@ -1,0 +1,8 @@
+@keyframes moving {
+  100% {transform: rotate(360deg);}
+}
+
+.spinner-img {
+  margin: 1em;
+  animation: moving 2s infinite linear;
+}

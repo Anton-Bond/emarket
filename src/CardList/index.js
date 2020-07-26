@@ -21,9 +21,7 @@ const CardList = (props) => {
   return (
     <div>
       {planets}
-      <AddCard
-        onSave={props.onSaveNew}
-      />
+      <AddCard onSave={props.onSaveNew} />
     </div>
   );
 };

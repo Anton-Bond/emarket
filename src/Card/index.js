@@ -3,11 +3,12 @@ import React, { Component } from 'react';
 import './Card.css';
 import CardBody from './CardBody';
 import CardHeader from './CardHeader';
+import withLoadingDelay from '../hoc/withLoadingDelay';
 
 class Card extends Component {
   state = {
-    id: this.props.id,
     cardValues: {
+      id: this.props.id,
       title: this.props.title,
       context: this.props.context,
     },
@@ -18,6 +19,7 @@ class Card extends Component {
   titleChangedHandler = (event) => {
     this.setState({
       cardValues: {
+        id: this.state.cardValues.id,
         title: event.target.value,
         context: this.state.cardValues.context,
       },
@@ -27,6 +29,7 @@ class Card extends Component {
   contextChangedHandler = (event) => {
     this.setState({
       cardValues: {
+        id: this.state.cardValues.id,
         title: this.state.cardValues.title,
         context: event.target.value,
       },
@@ -71,7 +74,7 @@ class Card extends Component {
       };
     }
     // set new state when delete picked cards from main page app
-    if (!state.isEditMode && props.id !== state.id) {
+    if (!state.isEditMode && props.id !== state.cardValues.id) {
       return {
         cardValues: { ...props },
         isChecked: false,
@@ -81,6 +84,7 @@ class Card extends Component {
   }
 
   render() {
+    // console.log(this.props)
     return (
       // style depends on checkbox
       <div className="Card" style={{ color: this.state.isChecked && '#63ce5a' }}>
@@ -106,4 +110,4 @@ class Card extends Component {
   }
 }
 
-export default Card;
+export default withLoadingDelay(Card);

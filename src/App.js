@@ -84,9 +84,9 @@ class App extends Component {
       id: values.id,
       title: values.title,
       context: values.context,
-    }
-    this.setState({planets: [...this.state.planets, newPlanet]})
-  }
+    };
+    this.setState({ planets: [...this.state.planets, newPlanet] });
+  };
 
   // add index of picked card or delete from array
   pickCardHandler = (id) => (isChecked) => {
