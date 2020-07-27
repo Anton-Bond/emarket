@@ -58,7 +58,7 @@ class App extends Component {
   saveHandler = (id) => (value) => {
     this.setState({
       planets: this.state.planets.map((planet) => {
-        return id === planet.id ? { ...value } : planet;
+        return id === planet.id ? { ...planet, ...value } : planet;
       }),
     });
   };

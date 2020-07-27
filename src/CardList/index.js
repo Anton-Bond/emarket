@@ -10,7 +10,6 @@ const CardList = (props) => {
         title={p.title}
         context={p.context}
         key={p.id}
-        id={p.id}
         isViewOnly={props.viewOnly}
         onSave={props.onSave(p.id)}
         onChecked={props.pickCard(p.id)}

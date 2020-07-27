@@ -13,7 +13,9 @@ const withLoadingDelay = (WrappedComponent) => {
     componentDidMount() {
       this._isMounted = true;
       setTimeout(() => {
-        this.setState({ isLoading: false });
+        if (this._isMounted) {
+          this.setState({ isLoading: false });
+        }
       }, 2000);
     }
 

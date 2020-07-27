@@ -8,7 +8,6 @@ import withLoadingDelay from '../hoc/withLoadingDelay';
 class Card extends Component {
   state = {
     cardValues: {
-      id: this.props.id,
       title: this.props.title,
       context: this.props.context,
     },
@@ -19,7 +18,6 @@ class Card extends Component {
   titleChangedHandler = (event) => {
     this.setState({
       cardValues: {
-        id: this.state.cardValues.id,
         title: event.target.value,
         context: this.state.cardValues.context,
       },
@@ -29,7 +27,6 @@ class Card extends Component {
   contextChangedHandler = (event) => {
     this.setState({
       cardValues: {
-        id: this.state.cardValues.id,
         title: this.state.cardValues.title,
         context: event.target.value,
       },
@@ -74,10 +71,9 @@ class Card extends Component {
       };
     }
     // set new state when delete picked cards from main page app
-    if (!state.isEditMode && props.id !== state.cardValues.id) {
+    if (!state.isEditMode) {
       return {
-        cardValues: { ...props },
-        isChecked: false,
+        cardValues: { ...props }
       };
     }
     return null;
@@ -110,4 +106,4 @@ class Card extends Component {
   }
 }
 
-export default withLoadingDelay(Card);
+export default  withLoadingDelay(Card);
