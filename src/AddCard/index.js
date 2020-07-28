@@ -5,6 +5,7 @@ import { AiOutlinePlusCircle } from 'react-icons/ai';
 import { v1 as uuidv1 } from 'uuid';
 
 import './AddCard.css';
+import CardContext from '../context/card-context';
 
 class AddCard extends Component {
   state = {
@@ -12,6 +13,9 @@ class AddCard extends Component {
     title: '',
     context: '',
   };
+
+  // set context 
+  static contextType = CardContext;
 
   titleChangedHandler = (event) => {
     this.setState({
@@ -27,7 +31,7 @@ class AddCard extends Component {
 
   // save new card to App state
   saveHandler = () => {
-    this.props.onSave(this.state);
+    this.context.onSaveNew(this.state);
     this.setState({
       id: null,
     });

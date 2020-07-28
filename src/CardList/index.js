@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import Card from '../Card';
 import AddCard from '../AddCard';
+import CardContext from '../context/card-context';
 
-const CardList = (props) => {
+const CardList = (props) => { 
+  const cardContext = useContext(CardContext);
   const planets = props.planets.map((p) => {
     return (
       <Card
         title={p.title}
         context={p.context}
         key={p.id}
-        isViewOnly={props.viewOnly}
+        isViewOnly={cardContext.isViewOnly}
         onSave={props.onSave(p.id)}
         onChecked={props.pickCard(p.id)}
       />
@@ -20,7 +22,7 @@ const CardList = (props) => {
   return (
     <div>
       {planets}
-      <AddCard onSave={props.onSaveNew} />
+      <AddCard />
     </div>
   );
 };

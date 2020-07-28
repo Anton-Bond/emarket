@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import './Card.css';
 import CardBody from './CardBody';
@@ -80,7 +81,6 @@ class Card extends Component {
   }
 
   render() {
-    // console.log(this.props)
     return (
       // style depends on checkbox
       <div className="Card" style={{ color: this.state.isChecked && '#63ce5a' }}>
@@ -91,7 +91,6 @@ class Card extends Component {
           saved={this.saveChangesHandler}
           canceled={this.cancelChangesHandler}
           switched={this.switchToEditModeHandler}
-          viewOnly={this.props.isViewOnly}
           checked={this.checkedHandler}
           isChecked={this.state.isChecked}
         />
@@ -105,5 +104,13 @@ class Card extends Component {
     );
   }
 }
+
+Card.propTypes = {
+  title: PropTypes.string,
+  context: PropTypes.string,
+  isViewOnly: PropTypes.bool,
+  onSave: PropTypes.func,
+  onChecked: PropTypes.func,
+};
 
 export default  withLoadingDelay(Card);

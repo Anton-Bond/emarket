@@ -5,6 +5,7 @@ import { v1 as uuidv1 } from 'uuid';
 import './App.css';
 import Header from './Header';
 import CardList from './CardList';
+import CardContext from './context/card-context';
 
 class App extends Component {
   state = {
@@ -131,37 +132,43 @@ class App extends Component {
 
     return (
       <div className="App">
-        <Header />
-        <div className="cardWrapper">
-          <div className="view-checkbox">
-            <StyledCheckboxView
-              type="checkbox"
-              name="viewOnly"
-              id="viewOnly"
-              checked={this.state.viewOnly}
-              onChange={this.toggleViewOnlyHandler}
+        <CardContext.Provider
+          value={{
+            cards: this.state.planets,
+            isViewOnly: this.state.viewOnly,
+            onSaveNew: this.addNewPlanetHandler,
+          }}
+        >
+          <Header />
+          <div className="cardWrapper">
+            <div className="view-checkbox">
+              <StyledCheckboxView
+                type="checkbox"
+                name="viewOnly"
+                id="viewOnly"
+                checked={this.state.viewOnly}
+                onChange={this.toggleViewOnlyHandler}
+              />
+              <StyledLabelView htmlFor="viewOnly" alt={this.state.viewOnly ? 1 : 0}>
+                Только просмотр
+              </StyledLabelView>
+            </div>
+            <CardList
+              planets={this.state.planets}
+              onSave={this.saveHandler}
+              pickCard={this.pickCardHandler}
             />
-            <StyledLabelView htmlFor="viewOnly" alt={this.state.viewOnly ? 1 : 0}>
-              Только просмотр
-            </StyledLabelView>
+            <div>
+              <button
+                className="btn-delete"
+                disabled={this.state.viewOnly}
+                onClick={this.deleteCardsHandler}
+              >
+                Удалить выбранные карточки
+              </button>
+            </div>
           </div>
-          <CardList
-            planets={this.state.planets}
-            viewOnly={this.state.viewOnly}
-            onSave={this.saveHandler}
-            pickCard={this.pickCardHandler}
-            onSaveNew={this.addNewPlanetHandler}
-          />
-          <div>
-            <button
-              className="btn-delete"
-              disabled={this.state.viewOnly}
-              onClick={this.deleteCardsHandler}
-            >
-              Удалить выбранные карточки
-            </button>
-          </div>
-        </div>
+        </CardContext.Provider>
       </div>
     );
   }
