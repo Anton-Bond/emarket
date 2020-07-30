@@ -4,10 +4,10 @@ import { AiOutlineCheck } from 'react-icons/ai';
 import { AiOutlineClose } from 'react-icons/ai';
 
 import './CardHeader.css';
-import CardContext from '../../context/card-context';
+import CardsContext from '../../context/cards-context';
 
 const CardHeader = (props) => {
-  const cardContext = useContext(CardContext);
+  const cardsContext = useContext(CardsContext);
   return (
     <div>
       {props.editMode ? (
@@ -37,7 +37,7 @@ const CardHeader = (props) => {
           </div>
           <div className="Controls">
             {/* hide edit button when view only */}
-            {!cardContext.isViewOnly ? (
+            {!cardsContext.state.viewOnly ? (
               <AiOutlineEdit onClick={props.switched} />
             ) : null}
             {/* color switcher */}

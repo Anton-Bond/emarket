@@ -1,14 +1,14 @@
 import React, { useContext } from 'react';
 
 import './Counter.css';
-import CardContext from '../context/card-context';
+import CardsContext from '../context/cards-context';
 
 const Counter = props => {
-  const cardContext = useContext(CardContext);
+  const cardsContext = useContext(CardsContext);
   return (
     <div className="wrapper">
       <span className="badge-title">Количество</span>
-      <span className="badge">{cardContext.cards.length}</span>
+      <span className="badge">{cardsContext.state.planets.length}</span>
     </div>
   );
 }

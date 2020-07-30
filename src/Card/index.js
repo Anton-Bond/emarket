@@ -63,18 +63,12 @@ class Card extends Component {
     this.setState({ isChecked: !this.state.isChecked });
   };
 
-  // set off edit mode and discard changes when toggle to view only
   static getDerivedStateFromProps(props, state) {
+    // set off edit mode and discard changes when toggle to view only
     if (props.isViewOnly) {
       return {
         cardValues: { ...props },
         isEditMode: false,
-      };
-    }
-    // set new state when delete picked cards from main page app
-    if (!state.isEditMode) {
-      return {
-        cardValues: { ...props }
       };
     }
     return null;
@@ -106,11 +100,11 @@ class Card extends Component {
 }
 
 Card.propTypes = {
-  title: PropTypes.string,
-  context: PropTypes.string,
-  isViewOnly: PropTypes.bool,
-  onSave: PropTypes.func,
-  onChecked: PropTypes.func,
+  title: PropTypes.string.isRequired,
+  context: PropTypes.string.isRequired,
+  isViewOnly: PropTypes.bool.isRequired,
+  onSave: PropTypes.func.isRequired,
+  onChecked: PropTypes.func.isRequired,
 };
 
 export default  withLoadingDelay(Card);
