@@ -65,7 +65,7 @@ class Card extends Component {
 
   static getDerivedStateFromProps(props, state) {
     // set off edit mode and discard changes when toggle to view only
-    if (props.isViewOnly) {
+    if (props.viewOnly) {
       return {
         cardValues: { ...props },
         isEditMode: false,
@@ -87,6 +87,7 @@ class Card extends Component {
           switched={this.switchToEditModeHandler}
           checked={this.checkedHandler}
           isChecked={this.state.isChecked}
+          viewOnly={this.props.viewOnly}
         />
         <hr />
         <CardBody
@@ -102,7 +103,7 @@ class Card extends Component {
 Card.propTypes = {
   title: PropTypes.string.isRequired,
   context: PropTypes.string.isRequired,
-  isViewOnly: PropTypes.bool.isRequired,
+  viewOnly: PropTypes.bool.isRequired,
   onSave: PropTypes.func.isRequired,
   onChecked: PropTypes.func.isRequired,
 };

@@ -2,7 +2,6 @@ import React from 'react';
 
 const cardContext = React.createContext({
   state: {},
-  toggleView: () => {},
   onSave: () => {},
   onDelete: () => {},
   addNew: () => {},

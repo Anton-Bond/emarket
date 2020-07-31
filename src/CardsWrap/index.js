@@ -50,15 +50,9 @@ class CardsWrap extends Component {
           context: `Нептун - восьмая и самая отдаленная главная планета, вращающаяся вокруг нашего Солнца, - темный, холодный и взбитый сверхзвуковыми ветрами. Это была первая планета, найденная с помощью математических расчетов.`,
         },
       ],
-      viewOnly: false,
       checkedCards: [],
     };
   }
-
-  // toggle view page mode
-  toggleViewOnlyHandler = () => {
-    this.setState({ viewOnly: !this.state.viewOnly });
-  };
 
   // save card changes
   saveHandler = (id) => (value) => {
@@ -107,7 +101,6 @@ class CardsWrap extends Component {
       return (
           <CradsContext.Provider value={{
             state: this.state,
-            toggleView: this.toggleViewOnlyHandler,
             onSave: this.saveHandler,
             onDelete: this.deleteCardsHandler,
             addNew: this.addNewPlanetHandler,

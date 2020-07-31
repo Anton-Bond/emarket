@@ -12,7 +12,7 @@ const CardList = (props) => {
         title={p.title}
         context={p.context}
         key={p.id}
-        isViewOnly={cardsContext.state.viewOnly}
+        viewOnly={props.viewOnly}
         onSave={cardsContext.onSave(p.id)}
         onChecked={cardsContext.onPick(p.id)}
       />

@@ -9,6 +9,14 @@ import CardsContext from './context/cards-context';
 class App extends Component {
 
   static contextType = CardsContext;
+  state = {
+    viewOnly: false
+  };
+
+  // toggle view page mode
+  toggleViewOnlyHandler = () => {
+    this.setState({ viewOnly: !this.state.viewOnly });
+  };
 
   render() {
     const StyledLabelView = styled.label`
@@ -46,18 +54,20 @@ class App extends Component {
               type="checkbox"
               name="viewOnly"
               id="viewOnly"
-              checked={this.context.state.viewOnly}
-              onChange={this.context.toggleView}
+              checked={this.state.viewOnly}
+              onChange={this.toggleViewOnlyHandler}
             />
-            <StyledLabelView htmlFor="viewOnly" alt={this.context.state.viewOnly ? 1 : 0}>
+            <StyledLabelView htmlFor="viewOnly" alt={this.state.viewOnly ? 1 : 0}>
               Только просмотр
             </StyledLabelView>
           </div>
-          <CardList />
+          <CardList
+            viewOnly={this.state.viewOnly}
+          />
           <div>
             <button
               className="btn-delete"
-              disabled={this.context.state.viewOnly}
+              disabled={this.state.viewOnly}
               onClick={this.context.onDelete}
             >
               Удалить выбранные карточки
