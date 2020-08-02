@@ -8,7 +8,7 @@ const Counter = props => {
   return (
     <div className="wrapper">
       <span className="badge-title">Количество</span>
-      <span className="badge">{cardsContext.state.planets.length}</span>
+      <span className="badge">{cardsContext.state.pokemons.length}</span>
     </div>
   );
 }

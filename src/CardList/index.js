@@ -6,7 +6,7 @@ import CardsContext from '../context/cards-context';
 
 const CardList = (props) => { 
   const cardsContext = useContext(CardsContext);
-  const planets = cardsContext.state.planets.map((p) => {
+  const pokemons = cardsContext.state.pokemons.map((p) => {
     return (
       <Card
         title={p.title}
@@ -21,7 +21,7 @@ const CardList = (props) => {
 
   return (
     <div>
-      {planets}
+      {pokemons}
       <AddCard />
     </div>
   );
