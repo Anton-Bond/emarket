@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import LoadingIndicator from '../LoadingIndicator';
+import LoadingIndicator from '../components/LoadingIndicator';
 
 const withLoadingDelay = (WrappedComponent) => {
   return class extends Component {

@@ -5,7 +5,7 @@ import { AiOutlinePlusCircle } from 'react-icons/ai';
 import { v1 as uuidv1 } from 'uuid';
 
 import './AddCard.css';
-import CardContext from '../context/cards-context';
+import CardContext from '../../context/cards-context';
 
 class AddCard extends Component {
   state = {

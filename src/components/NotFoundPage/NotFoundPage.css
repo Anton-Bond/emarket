@@ -1,0 +1,17 @@
+.NotFoundPage {
+  text-align: center;
+  padding: 5em;
+  color: #4b4b4b;
+}
+
+.NotFoundPage .back-btn {
+  display: block;
+  margin: 1em;
+  font-size: 90%;
+  text-decoration: none;
+  color: #0011ff;
+}
+
+.NotFoundPage .back-btn:hover {
+  text-decoration: underline;
+}

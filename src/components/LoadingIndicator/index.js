@@ -4,7 +4,7 @@ import './LoadingIndicator.css';
 
 const LoadingIndicator = () => {
   return (
-    <img src={require('../assets/images/spinner.png')} alt="Loading..." className="spinner-img" />
+    <img src={require('../../assets/images/spinner.png')} alt="Loading..." className="spinner-img" />
   );
 };
 

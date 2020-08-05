@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 
 import './Counter.css';
-import CardsContext from '../context/cards-context';
+import CardsContext from '../../context/cards-context';
 
 const Counter = props => {
   const cardsContext = useContext(CardsContext);

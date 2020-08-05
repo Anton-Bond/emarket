@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
+
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
@@ -9,7 +11,9 @@ import CradsWrap from './CardsWrap';
 ReactDOM.render(
   <React.StrictMode>
     <CradsWrap>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </CradsWrap>
   </React.StrictMode>,
   document.getElementById('root'),

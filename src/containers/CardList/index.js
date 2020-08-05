@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 
-import Card from '../Card';
-import AddCard from '../AddCard';
-import CardsContext from '../context/cards-context';
+import Card from '../../components/Card';
+import AddCard from '../../components/AddCard';
+import CardsContext from '../../context/cards-context';
 
 const CardList = (props) => { 
   const cardsContext = useContext(CardsContext);

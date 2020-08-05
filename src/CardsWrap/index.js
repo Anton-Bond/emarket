@@ -5,32 +5,32 @@ import axios from 'axios';
 import CradsContext from '../context/cards-context';
 
 class CardsWrap extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
       pokemons: [],
       checkedCards: [],
-      error: false
+      error: false,
     };
   }
 
   // get card data from server
-  componentDidMount () {
-    axios.get('https://raw.githubusercontent.com/BrunnerLivio/PokemonDataGraber/master/output.json')
-      .then(response => {
+  componentDidMount() {
+    axios
+      .get('https://raw.githubusercontent.com/BrunnerLivio/PokemonDataGraber/master/output.json')
+      .then((response) => {
         const pokemons = response.data.slice(0, 15);
-        const updatedPockemons = pokemons.map(pokemon => {
+        const updatedPockemons = pokemons.map((pokemon) => {
           return {
             id: uuidv1(),
             title: pokemon.Name,
-            context: pokemon.About
-          }
+            context: pokemon.About,
+          };
         });
-        this.setState({pokemons: updatedPockemons});
+        this.setState({ pokemons: updatedPockemons });
       })
-      .catch(error => {
-        this.setState({error: true});
+      .catch((error) => {
+        this.setState({ error: true });
       });
   }
 
@@ -79,27 +79,25 @@ class CardsWrap extends Component {
 
   render() {
     // show this if get error from server
-    let pageContext = <p style={{textAlign: 'center'}}>Something went wrong!</p>;
+    let pageContext = <p style={{ textAlign: 'center' }}>Something went wrong!</p>;
     // when server responses data
     if (!this.state.error) {
       pageContext = (
-        <CradsContext.Provider value={{
-          state: this.state,
-          onSave: this.saveHandler,
-          onDelete: this.deleteCardsHandler,
-          addNew: this.addNewpokemonHandler,
-          onPick: this.pickCardHandler,
-        }}>      
-            {this.props.children}
+        <CradsContext.Provider
+          value={{
+            state: this.state,
+            onSave: this.saveHandler,
+            onDelete: this.deleteCardsHandler,
+            addNew: this.addNewpokemonHandler,
+            onPick: this.pickCardHandler,
+          }}
+        >
+          {this.props.children}
         </CradsContext.Provider>
       );
     }
 
-    return (
-      <div>
-        {pageContext}
-      </div>
-    )
+    return <div>{pageContext}</div>;
   }
 }
 

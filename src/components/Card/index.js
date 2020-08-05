@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import './Card.css';
 import CardBody from './CardBody';
 import CardHeader from './CardHeader';
-import withLoadingDelay from '../hoc/withLoadingDelay';
+import withLoadingDelay from '../../hoc/withLoadingDelay';
 
 class Card extends Component {
   state = {
