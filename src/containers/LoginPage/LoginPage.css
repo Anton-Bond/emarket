@@ -17,49 +17,6 @@
 .LoginPage .form-s {
   padding-top: 40px;
 }
-      
-.LoginPage .inp-username {
-  width: 76%;
-  color: rgb(38, 50, 56);
-  font-weight: 700;
-  font-size: 14px;
-  letter-spacing: 1px;
-  background: rgba(136, 126, 126, 0.04);
-  padding: 10px 20px;
-  border: none;
-  border-radius: .5em;
-  outline: none;
-  box-sizing: border-box;
-  border: 2px solid rgba(0, 0, 0, 0.02);
-  margin-bottom: 50px;
-  margin-left: 46px;
-  text-align: center;
-  margin-bottom: 27px;
-}
-      
-.LoginPage .inp-pass {
-  width: 76%;
-  color: rgb(38, 50, 56);
-  font-weight: 700;
-  font-size: 14px;
-  letter-spacing: 1px;
-  background: rgba(136, 126, 126, 0.04);
-  padding: 10px 20px;
-  border: none;
-  border-radius: .5em;
-  outline: none;
-  box-sizing: border-box;
-  border: 2px solid rgba(0, 0, 0, 0.02);
-  margin-bottom: 50px;
-  margin-left: 46px;
-  text-align: center;
-  margin-bottom: 27px;
-}
-     
-.LoginPage .inp-username:focus, .inp-pass:focus {
-  border: 2px solid rgba(0, 0, 0, 0.18);
-}
-
 .LoginPage .btn-submit {
   cursor: pointer;
   margin-left: 35%;
@@ -85,7 +42,8 @@
 }
 
 .LoginPage .btn-submit:disabled {
-  color: #444444;
-  background: linear-gradient(#828584, #a3aaa9) #828584;
-  border-color: #fcfcfc #000 #8f8d8d;
+  cursor: not-allowed;
+  color: #535353;
+  background: linear-gradient(#c2c2c2, #e0e0e0) #c2c2c2;
+  border-color: #fcfcfc #555555 #d1d1d1;
 }
