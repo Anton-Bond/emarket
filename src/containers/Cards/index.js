@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 
 import './Cards.css';
 import CardList from '../CardList';
-import CardsContext from '../../context/cards-context';
+import { deletePickedCards } from '../../store/actions/actions';
 
 class HomePage extends Component {
 
-  static contextType = CardsContext;
   state = {
     viewOnly: false
   };
@@ -65,7 +65,7 @@ class HomePage extends Component {
           <button
             className="btn-delete"
             disabled={this.state.viewOnly}
-            onClick={this.context.onDelete}
+            onClick={() => this.props.onDelete(this.props.pickedCards)}
           >
             Удалить выбранные карточки
           </button>
@@ -75,4 +75,16 @@ class HomePage extends Component {
   }
 }
 
-export default HomePage;
+const mapStateToProps = (state) => {
+  return {
+    pickedCards: state.pickedCards.cards
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onDelete: (cardIds) => dispatch(deletePickedCards(cardIds))
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

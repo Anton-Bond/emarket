@@ -3,9 +3,10 @@ import { AiOutlineCheck } from 'react-icons/ai';
 import { AiOutlineClose } from 'react-icons/ai';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
 import { v1 as uuidv1 } from 'uuid';
+import { connect } from 'react-redux';
 
 import './AddCard.css';
-import CardContext from '../../context/cards-context';
+import { addNew } from '../../store/actions/actions';
 
 class AddCard extends Component {
   state = {
@@ -13,9 +14,6 @@ class AddCard extends Component {
     title: '',
     context: '',
   };
-
-  // set context 
-  static contextType = CardContext;
 
   titleChangedHandler = (event) => {
     this.setState({
@@ -31,7 +29,7 @@ class AddCard extends Component {
 
   // save new card to App state
   saveHandler = () => {
-    this.context.addNew(this.state);
+    this.props.onSave(this.state);
     this.setState({
       id: null,
     });
@@ -85,4 +83,10 @@ class AddCard extends Component {
   }
 }
 
-export default AddCard;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onSave: (value) => dispatch(addNew(value))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(AddCard);

@@ -1,0 +1,23 @@
+.CardPage {
+  margin: 2em auto;
+  text-align: center;
+}
+
+.CardPage .btn-back {
+  margin-left: 20px;
+  display: inline-block;
+  color: white;
+  text-decoration: none;
+  padding: .5em 2em;
+  outline: none;
+  border-width: 2px 0;
+  border-style: solid none;
+  border-color: #5350f8 #000 #3349c4;
+  border-radius: 6px;
+  background: linear-gradient(#4e59f5, #2234da) #4e59f5;
+  transition: 0.2s;
+}
+
+.CardPage .btn-back:hover { 
+  background: linear-gradient(#2234da, #4e59f5) #2234da;
+}

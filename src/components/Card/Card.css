@@ -5,6 +5,7 @@
   display: inline-block;
   margin: 1em;
   vertical-align: top;
+  cursor: pointer;
 }
 
 .Card p {

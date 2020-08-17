@@ -1,24 +1,33 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { connect } from 'react-redux'
 
 import Card from '../../components/Card';
 import AddCard from '../../components/AddCard';
-import CardsContext from '../../context/cards-context';
 
-const CardList = (props) => { 
-  const cardsContext = useContext(CardsContext);
-  const pokemons = cardsContext.state.pokemons.map((p) => {
+const CardList = (props) => {
+
+  // something went wrong while get data from server
+  if (props.hasErrored) {
+    return <p>Sorry! There was an error loading the data</p>;
+  }
+
+  if (!props.isLoaded) {
+      return <p>Loading…</p>;
+  }
+
+  // if data fetch success
+  const pokemons = props.pokemons.map((p) => {
     return (
       <Card
+        id={p.id}
         title={p.title}
         context={p.context}
         key={p.id}
         viewOnly={props.viewOnly}
-        onSave={cardsContext.onSave(p.id)}
-        onChecked={cardsContext.onPick(p.id)}
       />
     );
   });
-
+  
   return (
     <div>
       {pokemons}
@@ -27,4 +36,12 @@ const CardList = (props) => {
   );
 };
 
-export default CardList;
+const mapStateToProps = (state) => {
+  return {
+    pokemons: state.cards.pokemons,
+    isLoaded: state.cards.isLoaded,
+    hasErrored: state.cards.error
+  }
+}
+
+export default connect(mapStateToProps)(CardList);
