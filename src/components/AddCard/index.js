@@ -83,10 +83,8 @@ class AddCard extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onSave: (value) => dispatch(addNew(value))
-  }
+const mapDispatchToProps = {
+  onSave: addNew
 }
 
 export default connect(null, mapDispatchToProps)(AddCard);
