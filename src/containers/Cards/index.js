@@ -4,19 +4,9 @@ import { connect } from 'react-redux';
 
 import './Cards.css';
 import CardList from '../CardList';
-import { deletePickedCards } from '../../store/actions/actions';
+import * as actionCreators from '../../store/actions';
 
 class HomePage extends Component {
-
-  state = {
-    viewOnly: false
-  };
-
-  // toggle view page mode
-  toggleViewOnlyHandler = () => {
-    this.setState({ viewOnly: !this.state.viewOnly });
-  };
-
   render() {
     const StyledLabelView = styled.label`
       &:before {
@@ -44,27 +34,28 @@ class HomePage extends Component {
       display: none;
     `;
 
+    const checkbox = this.props.isAdmin && this.props.location.pathname === '/settings' ?
+      <div className="view-checkbox">
+        <StyledCheckboxView
+          type="checkbox"
+          name="viewOnly"
+          id="viewOnly"
+          checked={this.props.viewOnly}
+          onChange={this.props.onToggleView}
+        />
+        <StyledLabelView htmlFor="viewOnly" alt={this.props.viewOnly ? 1 : 0}>
+          Только просмотр
+        </StyledLabelView>
+      </div> : null;
+
     return (
       <div className="wrapper-context">
-        <div className="view-checkbox">
-          <StyledCheckboxView
-            type="checkbox"
-            name="viewOnly"
-            id="viewOnly"
-            checked={this.state.viewOnly}
-            onChange={this.toggleViewOnlyHandler}
-          />
-          <StyledLabelView htmlFor="viewOnly" alt={this.state.viewOnly ? 1 : 0}>
-            Только просмотр
-          </StyledLabelView>
-        </div>
-        <CardList
-          viewOnly={this.state.viewOnly}
-        />
+        {checkbox}
+        <CardList />
         <div>
           <button
             className="btn-delete"
-            disabled={this.state.viewOnly}
+            disabled={this.props.viewOnly}
             onClick={() => this.props.onDelete(this.props.pickedCards)}
           >
             Удалить выбранные карточки
@@ -77,13 +68,16 @@ class HomePage extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    pickedCards: state.pickedCards.cards
+    pickedCards: state.pickedCards.cards,
+    viewOnly: state.cards.viewOnly,
+    isAdmin: state.auth.isAdmin
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    onDelete: (cardIds) => dispatch(deletePickedCards(cardIds))
+    onDelete: (cardIds) => dispatch(actionCreators.deletePickedCards(cardIds)),
+    onToggleView: () => dispatch(actionCreators.toggleView())
   }
 };
 

@@ -5,3 +5,7 @@ export const SAVE_CHANGES = 'SAVE_CHANGES';
 export const DELETE_CARDS = 'DELETE_CARDS';
 export const ADD = 'ADD';
 export const PICK_CARD = 'PICK_CARD';
+export const TOGGLE_VIEW = 'TOGGLE_VIEW';
+export const LOGIN = 'LOGIN';
+export const LOGOUT = 'LOGOUT';
+export const INIT_USER = 'INIT_USER';

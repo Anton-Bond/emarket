@@ -1,33 +1,25 @@
 import { v1 as uuidv1 } from 'uuid';
 import axios from 'axios';
 
-import { 
-  DATA_HAS_ERRORED,
-  DATA_IS_LOADED,
-  DATA_FETCH_SUCCESS,
-  PICK_CARD,
-  DELETE_CARDS,
-  ADD,
-  SAVE_CHANGES
-} from './actionTypes';
+import * as actionTypes from './actionTypes';
 
 export const dataHasErrored = (bool) => {
   return {
-      type: DATA_HAS_ERRORED,
+      type: actionTypes.DATA_HAS_ERRORED,
       hasErrored: bool
   };
 }
 
 export const dataIsLoaded = (bool) => {
   return {
-      type: DATA_IS_LOADED,
+      type: actionTypes.DATA_IS_LOADED,
       isLoaded: bool
   };
 }
 
 export const dataFetchSuccess = (items) => {
   return {
-      type: DATA_FETCH_SUCCESS,
+      type: actionTypes.DATA_FETCH_SUCCESS,
       items
   };
 }
@@ -64,29 +56,20 @@ export const asyncDataFetch = (url) => {
 
 export const saveChanges = (pokemon) => {
   return {
-    type: SAVE_CHANGES,
+    type: actionTypes.SAVE_CHANGES,
     pokemon
-  }
-}
-
-export const deletePickedCards = (pickedCards) => {
-  return {
-    type: DELETE_CARDS,
-    pickedCards
   }
 }
 
 export const addNew = (pokemon) => {
   return {
-    type: ADD,
+    type: actionTypes.ADD,
     pokemon
   }
 }
 
-export const pickCard = (cardId, isChecked) => {
+export const toggleView = () => {
   return {
-    type: PICK_CARD,
-    value: cardId,
-    isChecked
+    type: actionTypes.TOGGLE_VIEW
   }
 }

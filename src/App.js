@@ -7,14 +7,17 @@ import Header from './containers/Header';
 import Cards from './containers/Cards';
 import LoginPage from './containers/LoginPage';
 import NotFoundPage from './components/NotFoundPage';
-import { asyncDataFetch } from './store/actions/actions';
+import * as actionCreators from './store/actions/';
 import CardPage from './containers/CardPage';
 
 class App extends Component {
 
-  // get pokemons from server
+
   componentDidMount() {
+    // get pokemons from server
     this.props.onDataFetch('https://raw.githubusercontent.com/BrunnerLivio/PokemonDataGraber/master/output.json');
+    // when reboot page, set user data from sessionStorage
+    this.props.onInitUser();
   }
 
   render() {
@@ -24,6 +27,8 @@ class App extends Component {
         <Switch>
           <Route path="/cards" exact component={Cards} />
           <Route path="/login" exact component={LoginPage} />
+          {/* for admin */}
+          <Route path="/settings" exact component={Cards} />
           <Route path="/card/:id" exact component={CardPage} />
           <Redirect from="/" to="/cards" exact />
           <Route exact component={NotFoundPage} />
@@ -35,7 +40,8 @@ class App extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onDataFetch: (url) => dispatch(asyncDataFetch(url)) 
+    onDataFetch: (url) => dispatch(actionCreators.asyncDataFetch(url)),
+    onInitUser: () => dispatch(actionCreators.initUser())
   }
 }
 

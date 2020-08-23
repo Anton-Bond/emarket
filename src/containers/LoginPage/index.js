@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import './LoginPage.css';
 import Input from '../../components/Input';
+import * as actionCreators from '../../store/actions';
 
 class LoginPage extends Component {
   state = {
@@ -88,7 +90,13 @@ class LoginPage extends Component {
 
   onSubmiHandler = (event) => {
     event.preventDefault();
-    this.props.history.push('/cards');
+    this.props.onLogin(this.state.form)
+      .then(() => {
+        this.props.history.push('/cards');
+      })
+      .catch(() => {
+        alert('Password is wrong! Please repeat.');
+      });   
   }
 
   render () {
@@ -125,4 +133,10 @@ class LoginPage extends Component {
 
 }
 
-export default LoginPage;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onLogin: (form) => dispatch(actionCreators.asyncLogin(form))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(LoginPage);

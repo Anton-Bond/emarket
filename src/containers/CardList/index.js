@@ -23,7 +23,6 @@ const CardList = (props) => {
         title={p.title}
         context={p.context}
         key={p.id}
-        viewOnly={props.viewOnly}
       />
     );
   });
@@ -31,7 +30,10 @@ const CardList = (props) => {
   return (
     <div>
       {pokemons}
-      <AddCard />
+      {props.viewOnly
+        ? null
+        : <AddCard />
+      }
     </div>
   );
 };
@@ -40,7 +42,8 @@ const mapStateToProps = (state) => {
   return {
     pokemons: state.cards.pokemons,
     isLoaded: state.cards.isLoaded,
-    hasErrored: state.cards.error
+    hasErrored: state.cards.error,
+    viewOnly: state.cards.viewOnly
   }
 }
 

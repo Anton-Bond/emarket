@@ -23,6 +23,13 @@
   display: inline-block;
 }
 
+.Header .main-menu li:first-child {
+  float: left;
+  padding-left: 10px;
+  line-height: 40px;
+  font-size: 20px;
+}
+
 .Header .main-menu li:last-child {
   border-right: 2px solid #ffcece;
 }
@@ -51,4 +58,19 @@
 .Header .active-tab {
   color: rgb(73, 73, 73);
   background-color: #ffafaf;
+}
+
+.Header .logout-tab {
+  cursor: pointer;
+  text-decoration: none;
+  background:#FF4444;
+  color:#fff;
+  padding:0px 15px;
+  line-height:40px;
+  display: block; 
+  border-left: 2px solid #ffcece;
+}
+
+.Header .logout-tab:hover {
+  background:#D43737;
 }

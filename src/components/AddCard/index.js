@@ -6,7 +6,7 @@ import { v1 as uuidv1 } from 'uuid';
 import { connect } from 'react-redux';
 
 import './AddCard.css';
-import { addNew } from '../../store/actions/actions';
+import * as actionCreators from '../../store/actions';
 
 class AddCard extends Component {
   state = {
@@ -84,7 +84,7 @@ class AddCard extends Component {
 }
 
 const mapDispatchToProps = {
-  onSave: addNew
+  onSave: actionCreators.addNew
 }
 
 export default connect(null, mapDispatchToProps)(AddCard);

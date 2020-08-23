@@ -7,7 +7,7 @@ import './Card.css';
 import CardBody from './CardBody';
 import CardHeader from './CardHeader';
 import withLoadingDelay from '../../hoc/withLoadingDelay';
-import { pickCard, saveChanges } from '../../store/actions/actions';
+import * as actionCreators from '../../store/actions';
 
 class Card extends Component {
   state = {
@@ -119,11 +119,17 @@ Card.propTypes = {
   viewOnly: PropTypes.bool.isRequired,
 };
 
+const mapStateToProps = (state) => {
+  return {
+    viewOnly: state.cards.viewOnly
+  }
+}
+
 const mapDispatchToProps = dispatch => {
   return {
-    onPickCard: (id, isChecked) => dispatch(pickCard(id, isChecked)),
-    onSave: (values) => dispatch(saveChanges(values))
+    onPickCard: (id, isChecked) => dispatch(actionCreators.pickCard(id, isChecked)),
+    onSave: (values) => dispatch(actionCreators.saveChanges(values))
   }
 };
 
-export default  withLoadingDelay(connect(null, mapDispatchToProps)(Card));
+export default  withLoadingDelay(connect(mapStateToProps, mapDispatchToProps)(Card));
