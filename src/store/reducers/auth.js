@@ -14,7 +14,7 @@ const initUser = (state, action) => {
   const isAuth = window.sessionStorage.getItem('isAuth');
   const isAdmin = window.sessionStorage.getItem('isAdmin');
   if (username && isAuth && isAdmin) {
-    return updateObject(state, {username, isAuth, isAdmin});
+    return updateObject(state, {username, isAuth: (isAuth === 'true'), isAdmin: (isAdmin === 'true')});
   } else {
     return {...state};
   }

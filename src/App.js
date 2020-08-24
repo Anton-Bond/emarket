@@ -9,6 +9,7 @@ import LoginPage from './containers/LoginPage';
 import NotFoundPage from './components/NotFoundPage';
 import * as actionCreators from './store/actions/';
 import CardPage from './containers/CardPage';
+import { PrivateRoute } from './helpers/PrivateRoute';
 
 class App extends Component {
 
@@ -28,7 +29,7 @@ class App extends Component {
           <Route path="/cards" exact component={Cards} />
           <Route path="/login" exact component={LoginPage} />
           {/* for admin */}
-          <Route path="/settings" exact component={Cards} />
+          <PrivateRoute path="/settings" exact component={Cards} />
           <Route path="/card/:id" exact component={CardPage} />
           <Redirect from="/" to="/cards" exact />
           <Route exact component={NotFoundPage} />
