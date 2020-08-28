@@ -26,6 +26,7 @@ describe('<Card />', () => {
           <Card />
         </MemoryRouter>
       );
+      wrapper.find('.Card').simulate('dblclick');
       expect(wrapper.find(CardHeader)).toHaveLength(1);
       expect(wrapper.find(CardBody)).toHaveLength(1);
     })
